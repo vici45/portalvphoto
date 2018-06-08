@@ -1,10 +1,13 @@
 package com.zomo.vphotoportal.service.imp;
 
 import com.google.common.collect.Lists;
+import com.zomo.vphotoportal.VO.ProjectDetailVO;
 import com.zomo.vphotoportal.VO.ProjectVO;
 import com.zomo.vphotoportal.common.Const;
 import com.zomo.vphotoportal.common.ServiceResponse;
 import com.zomo.vphotoportal.entity.Project;
+import com.zomo.vphotoportal.entity.ProjectDetail;
+import com.zomo.vphotoportal.repository.ProjectDetailRepository;
 import com.zomo.vphotoportal.repository.ProjectRepository;
 import com.zomo.vphotoportal.service.IProjectService;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +21,8 @@ public class ProjectServiceImp implements IProjectService {
 
     @Autowired
     private ProjectRepository projectRepository;
+    @Autowired
+    private ProjectDetailRepository projectDetailRepository;
 
     @Override
     public ServiceResponse findAll() {
@@ -36,6 +41,22 @@ public class ProjectServiceImp implements IProjectService {
             return ServiceResponse.createErrorMsg("项目不存在");
         }
         ProjectVO projectVO=assembleProject2ProjectVo(project);
+        return ServiceResponse.createSuccess(projectVO);
+    }
+
+    @Override
+    public ServiceResponse findByIdAndProjectStatus(Integer id) {
+        Project project=projectRepository.findByIdAndProjectStatus(id,Const.ProjectStatus.ONLINE.getCode());
+        if (project==null){
+            return ServiceResponse.createErrorMsg("项目不存在");
+        }
+        ProjectVO projectVO=assembleProject2ProjectVo(project);
+        List<ProjectDetail> projectDetailList=projectDetailRepository.findAllByProjectId(project.getId());
+        List<ProjectDetailVO> projectDetailVOList=Lists.newArrayList();
+        if (projectDetailList.size()>=0){
+           projectDetailVOList=assembleProjectDetailList2ProjectDetailVOList(projectDetailList);
+        }
+        projectVO.setProjectDetailVOList(projectDetailVOList);
         return ServiceResponse.createSuccess(projectVO);
     }
 
@@ -62,6 +83,30 @@ public class ProjectServiceImp implements IProjectService {
         ProjectVO projectVO=new ProjectVO();
         BeanUtils.copyProperties(project,projectVO);
         return projectVO;
+    }
+
+    /**
+     * 组装projectDetailVo
+     * @param projectDetail
+     * @return
+     */
+    private ProjectDetailVO assembleProjectDetail2ProjectDetailVO(ProjectDetail projectDetail){
+        ProjectDetailVO projectDetailVo=new ProjectDetailVO();
+        BeanUtils.copyProperties(projectDetail,projectDetailVo);
+        String smallImage=projectDetail.getImageHost()+"?imageView2/1/w/300/h/200";
+        String middleImage="http://image.compress"+projectDetail.getImageHost().substring(projectDetail.getImageHost().indexOf("."));
+        projectDetailVo.setSmallImage(smallImage);
+        projectDetailVo.setMiddleImage(middleImage);
+        return projectDetailVo;
+    }
+
+    private List<ProjectDetailVO> assembleProjectDetailList2ProjectDetailVOList(List<ProjectDetail> projectDetailList){
+        List<ProjectDetailVO> projectDetailVOList=Lists.newArrayList();
+        for (ProjectDetail projectDetail : projectDetailList) {
+            ProjectDetailVO projectDetailVO=assembleProjectDetail2ProjectDetailVO(projectDetail);
+            projectDetailVOList.add(projectDetailVO);
+        }
+        return projectDetailVOList;
     }
 
 }

@@ -49,17 +49,15 @@
 }
 
 #baguetteBox-overlay .full-image figcaption {
-    display: block;
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    line-height: 1.8;
-    white-space: normal;
-    color: #ccc;
-    background-color: #000;
-    background-color: rgba(0, 0, 0, 8);
-    font-family: sans-serif
+    top: 70%;
+    left: 50%;
+    left: calc(50% - 75px);
+    height: 30px;
+    font-size: 12px;
+    font-family: sans-serif;
+    opacity: 0.7;
+    letter-spacing:3px;
 }
 
 #baguetteBox-overlay .full-image:before {
@@ -136,13 +134,36 @@
     height: 60px
 }
 
-.download-button#download-button{
-    top: 80%;
-    top: calc(90% - 30px);
-    width: 200px;
-    height: 60px;
-    right: 50%;
+/*#picture-caption{
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    left: calc(50% - 95px);
+    height: 30px;
+    font-size: 15px;
+
+
+}*/
+#original-button{
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        left: calc(50% - 52px);
+        background-color: #000; /* Green */
+        color: white;
+        padding: 5px 14px;
+        font-size: 12px;
+        opacity: 0.5;
+        font-family: sans-serif;
+
 }
+
+/*#download-button{
+    position: absolute;
+    top: 90%;
+    right: 2%;
+    right: calc(2% + 6px);
+}*/
 
 .baguetteBox-button {
     position: absolute;
@@ -171,10 +192,6 @@
 
 .baguetteBox-button#previous-button {
     left: 2%
-}
-.download-button#download-button{
-    left: 50%;
-    top:50%;
 }
 
 .baguetteBox-button#close-button {

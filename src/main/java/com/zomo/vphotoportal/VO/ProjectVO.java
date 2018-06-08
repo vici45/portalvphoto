@@ -1,8 +1,10 @@
 package com.zomo.vphotoportal.VO;
 
+import com.google.common.collect.Lists;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.List;
 
 @Data
 public class ProjectVO {
@@ -21,4 +23,6 @@ public class ProjectVO {
     private String projectContentDetail;
 
     private Date projectTime;
+
+    private List<ProjectDetailVO> projectDetailVOList=Lists.newArrayList();
 }

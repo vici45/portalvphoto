@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProjectRepository extends CrudRepository<Project,Integer> {
     List<Project> findAllByProjectStatus(Integer status);
     Project findById(Integer id);
+    Project findByIdAndProjectStatus(Integer id,Integer status);
 }
