@@ -12,6 +12,7 @@ import com.zomo.vphotoportal.repository.ProjectRepository;
 import com.zomo.vphotoportal.service.IProjectService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,8 @@ import java.util.List;
 @Service
 public class ProjectServiceImp implements IProjectService {
 
+    @Value("${qiniu.cdn.prefix}")
+    public static String qiNiuCdnPrefix;
     @Autowired
     private ProjectRepository projectRepository;
     @Autowired
@@ -60,6 +63,16 @@ public class ProjectServiceImp implements IProjectService {
         return ServiceResponse.createSuccess(projectVO);
     }
 
+    @Override
+    public ServiceResponse findByIdAndProjectStatusPage(Integer id) {
+        Project project=projectRepository.findByIdAndProjectStatus(id,Const.ProjectStatus.ONLINE.getCode());
+        if (project==null){
+            return ServiceResponse.createErrorMsg("项目不存在");
+        }
+        ProjectVO projectVO=assembleProject2ProjectVo(project);
+        return ServiceResponse.createSuccess(projectVO);
+    }
+
     /**
      * 组装ProjectVOList
      * @param projectList
@@ -93,10 +106,11 @@ public class ProjectServiceImp implements IProjectService {
     private ProjectDetailVO assembleProjectDetail2ProjectDetailVO(ProjectDetail projectDetail){
         ProjectDetailVO projectDetailVo=new ProjectDetailVO();
         BeanUtils.copyProperties(projectDetail,projectDetailVo);
-        String smallImage=projectDetail.getImageHost()+"?imageView2/1/w/300/h/200";
-        String middleImage="http://image.compress"+projectDetail.getImageHost().substring(projectDetail.getImageHost().indexOf("."));
+        String smallImage=Const.qiNiuCdnPrefix+projectDetail.getImageHost()+Const.qiNiuSmallImageSuffix;
+        String middleImage=Const.qiNiuCompressCdnPrefix+projectDetail.getImageHost();
         projectDetailVo.setSmallImage(smallImage);
         projectDetailVo.setMiddleImage(middleImage);
+        projectDetailVo.setImageHost(Const.qiNiuCdnPrefix+projectDetail.getImageHost());
         return projectDetailVo;
     }
 

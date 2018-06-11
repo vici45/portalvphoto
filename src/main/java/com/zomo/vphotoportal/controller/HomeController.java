@@ -23,6 +23,6 @@ public class HomeController {
     }
     @RequestMapping(value = "test")
     public String test(Model model){
-        return "test";
+        return "projectIndex";
     }
 }

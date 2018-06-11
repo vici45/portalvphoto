@@ -7,4 +7,5 @@ public interface IProjectService {
     ServiceResponse findAll();
     ServiceResponse findById(Integer id);
     ServiceResponse findByIdAndProjectStatus(Integer id);
+    ServiceResponse findByIdAndProjectStatusPage(Integer id);
 }

@@ -2,7 +2,12 @@ package com.zomo.vphotoportal.common;
 
 import lombok.Getter;
 
+
 public class Const {
+
+    public static final String qiNiuCdnPrefix="http://image.zomo-studio.com/";
+    public static final String qiNiuCompressCdnPrefix="http://image.compress.zomo-studio.com/";
+    public static final String qiNiuSmallImageSuffix="?imageView2/1/w/300/h/200/";
     @Getter
     public enum ProjectStatus{
         ONLINE(0,"online"),

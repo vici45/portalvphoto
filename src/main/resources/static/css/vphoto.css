@@ -1,0 +1,34 @@
+body, html {
+　　position: fixed;
+　　top: 0px;
+　　bottom: 0px;
+　　width: 100%;
+　　height: 100%;
+}
+#span-timer {
+position:absolute;
+top:10%;
+right:8%;
+font-size:35px;
+}
+
+#entry-button {
+position:absolute;
+bottom:0px;
+width: 100%;
+height: 10%;
+background-color: #ffb400;
+font-size:60px;
+font-family:Microsoft YaHei;
+color: #000;
+padding:0px;
+border:0px;
+border-radius:25px 25px;
+}
+
+#error-image{
+display:block;
+margin:auto;
+width:100%;
+height:100%;
+}

@@ -12,12 +12,22 @@ public class ProjectController {
     @Autowired
     private IProjectService projectService;
 
-    @RequestMapping(value = "findById")
-    public String findById(Integer id, Model model){
+    @RequestMapping(value = "findByIdDetail")
+    public String findByIdDetail(Integer id, Model model){
         ServiceResponse serviceResponse=projectService.findByIdAndProjectStatus(id);
         if (serviceResponse.isSuccess()){
             model.addAttribute("project",serviceResponse.getData());
             return "list";
+        }
+        model.addAttribute("msg",serviceResponse.getMsg());
+        return "error";
+    }
+    @RequestMapping(value = "findByIdPage")
+    public String findByIdPage(Integer id, Model model){
+        ServiceResponse serviceResponse=projectService.findByIdAndProjectStatusPage(id);
+        if (serviceResponse.isSuccess()){
+            model.addAttribute("project",serviceResponse.getData());
+            return "projectIndex";
         }
         model.addAttribute("msg",serviceResponse.getMsg());
         return "error";
