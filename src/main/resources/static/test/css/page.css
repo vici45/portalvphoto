@@ -1,0 +1,136 @@
+html{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    overflow: auto;
+}
+.div-header{
+    width: 100%;
+    height: 11rem;
+}
+.div-left{
+    width: 40%;
+    height: 8.4rem;
+    float: left;
+}
+.div-left .div-img{
+    margin-top: 0.85rem;
+    margin-left:  0.85rem;
+
+
+}
+.div-left .banner{
+    height: 5.12rem;
+    margin: 0px;
+    border: grey 1px solid;
+    border-radius: 5.12rem;
+
+}
+.div-left .div-text{
+    margin-top: 0.64rem;
+    margin-left: 0.85rem;
+    margin-right: 0.85rem;
+}
+.div-left .div-text .block{
+    width: 50%;
+    height: 2.13rem;
+    float: left;
+    text-align: center;
+}
+.div-left .div-text .block .number{
+    margin-bottom: 0.043rem;
+    font-weight: bold;
+    font-size: 0.54rem;
+    color: grey;
+}
+.div-left .div-text .block .text{
+    margin-bottom: 0.043rem;
+    font-size: 0.46rem;
+    color: grey;
+}
+.div-right{
+    width: 60%;
+    height: 8.4rem;
+    float: left;
+}
+.div-right .div-text{
+    margin-top: 2.13rem;
+    margin-left: 10%;
+}
+.div-right .div-text .name{
+    font-size: 0.768rem;
+    font-weight: bold;
+    margin-bottom: 0.086rem;
+    letter-spacing: 0.043rem;
+}
+.div-right .div-text .sit{
+    font-size: 0.6rem;
+    margin-bottom: 0.086rem;
+    letter-spacing: 0.043rem;
+
+}
+.div-right .div-text .time{
+    letter-spacing: 0.043rem;
+    color: grey;
+    font-size: 0.6rem;
+}
+.div-right .link {
+    margin-left: 10%;
+}
+.div-right .link .img{
+    height: 1.07rem;
+    margin-top: 1.37rem;
+}
+.div-bottom{
+    width: 100%;
+    border-top: #eaeaea 0.043rem solid;
+    height: 2.6rem;
+    overflow: auto;
+}
+.div-bottom .pic{
+    width: 0.77rem;
+    height: 0.77rem;
+    margin: 0.8rem 2.26rem 0.426rem 2.26rem;
+    float: left;
+
+}
+.div-bottom .pic .bottom-button{
+    width: 0.77rem;
+    height: 0.77rem;
+}
+.div-picture{
+    margin: 0.043rem;
+    height: 5.242rem;
+    width: 5.242rem;
+    float: left;
+}
+.div-body{
+    margin: 0;
+    width: 100%;
+}
+.div-body .body-img{
+    width: 5.242rem;
+    height: 5.242rem;
+}
+.footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 2.13rem;
+    background-color: white;
+}
+.footer .footer-div{
+    float: left;
+    margin: 0.3rem 1.2rem 0.3rem 1.2rem;
+    height: 1.536rem;
+    width: 1.536rem;
+}
+.footer .footer-div .img{
+    height: 1.536rem;
+    width: 1.536rem;
+}

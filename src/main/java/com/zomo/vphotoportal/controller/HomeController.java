@@ -25,4 +25,9 @@ public class HomeController {
     public String test(Model model){
         return "projectIndex";
     }
+
+    @RequestMapping(value = "demo")
+    public String demo(){
+        return "test/demo4";
+    }
 }
