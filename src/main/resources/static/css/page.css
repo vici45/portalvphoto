@@ -26,9 +26,10 @@ body{
 }
 .div-left .banner{
     height: 5.12rem;
+    width: 5.12rem;
     margin: 0px;
     border: grey 1px solid;
-    border-radius: 5.12rem;
+    border-radius: 99rem;
 
 }
 .div-left .div-text{
@@ -67,11 +68,13 @@ body{
     font-weight: bold;
     margin-bottom: 0.086rem;
     letter-spacing: 0.043rem;
+    color: black;
 }
 .div-right .div-text .sit{
     font-size: 0.6rem;
     margin-bottom: 0.086rem;
     letter-spacing: 0.043rem;
+    color: black;
 
 }
 .div-right .div-text .time{
@@ -111,11 +114,19 @@ body{
 }
 .div-body{
     margin: 0;
+    height: 100%;
     width: 100%;
 }
 .div-body .body-img{
     width: 5.242rem;
     height: 5.242rem;
+}
+.div-body .div-body-bottom{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 2.13rem;
+    background-color: white;
 }
 .footer{
     position: absolute;

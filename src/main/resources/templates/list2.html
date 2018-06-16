@@ -1,0 +1,71 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<title th:text="${project.projectName}"></title>
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	<link rel="stylesheet" type="text/css" href="test/css/htmleaf-demo.css"/>
+	<link rel="stylesheet" type="text/css" href="css/photo.css"/>
+	<link rel="stylesheet" href="test/css/baguetteBox.min.css"/>
+	<link rel="stylesheet" href="test/css/fluid-gallery.css"/>
+</head>
+<body >
+
+<div class="htmleaf-container">
+	<div class="container gallery-container">
+		<div class="tz-gallery">
+
+			<div class="row">
+				<div class="col-sm-12 col-md-12	col-xs-12 banner" >
+					<img th:src="${project.projectBannerHost}" class="img-responsive	center-block banner"/>
+					<div class="col-sm-12 col-md-12 col-xs-12" style="padding-top:10px;padding-bottom:10px;;padding-left:0px">
+						<span  style="font-size:15px;margin-left:6px;pxfont-family:PingFangSC-Regular" th:text="${project.projectName}"></span>
+						<br/>
+						<span style="font-size:15px;margin-left:6px;font-family:PingFangSC-Regular" th:text="'共'+${project.projectDetailVOList.size()}+'张照片'"></span>
+						<br/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="htmleaf-container">
+	<img  src="css/refresh.png" id="refresh-button" onclick="javascript:window.location.reload() "/>
+	<img  src="css/top.png" id="top-button" />
+	<div class="container gallery-container" margin-left="0px" >
+		<div class="tz-gallery">
+			<div class="row" >
+<!--
+				<div class="col-sm-3 col-md-3 col-xs-4">
+					<a class="lightbox"	href="http://image.compress.zomo-studio.com/a5ce491b-90fb-41bb-9bec-7542db4a0bc3.jpg"   data-caption="请长按照片保存到本地" data-origin="http://image.zomo-studio.com/a5ce491b-90fb-41bb-9bec-7542db4a0bc3.jpg" data-origin-size="1M">
+						<images src="http://image.zomo-studio.com/a5ce491b-90fb-41bb-9bec-7542db4a0bc3.jpg?imageView2/1/w/300/h/200" />
+					</a>
+				</div>-->
+
+				<div class="col-sm-3 col-md-3 col-xs-4" th:each="detail,detailStatus:${project.projectDetailVOList}">
+					<a class="lightbox"	th:href="${detail.middleImage}"   data-caption="请长按照片保存到本地" th:attr="data-origin=${detail.imageHost},data-origin-size=${detail.size}">
+						<img th:src="${detail.smallImage}" />
+					</a>
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+</div>
+
+<script	type="text/javascript" src="test/js/baguetteBox.min.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script	type="text/javascript">
+    baguetteBox.run('.tz-gallery');
+
+</script>
+
+</body>
+</html>

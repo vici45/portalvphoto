@@ -11,8 +11,7 @@
 </head>
 
 <span id="span-timer"></span>
-<div id="my-image"<!-- th:style="'background:url(' + ${project.projectKeyImageHost} + ');' "-->>
-
+<div id="my-image"th:style="'background:url(' + ${project.projectKeyImageHost} + ');' ">
 </div>
 <div>
     <a th:href="@{/findByIdDetail(id=${project.id})}" id="detail-a"> <button id="entry-button"  >进&nbsp入&nbsp相&nbsp册</button> </a>
@@ -33,6 +32,7 @@ function go(){
         document.getElementById("span-timer").innerHTML=x+'s';
     }else {
         location.href=document.getElementById("detail-a").getAttribute("href");
+
     }
 }
 

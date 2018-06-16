@@ -7,7 +7,7 @@ public class Const {
 
     public static final String qiNiuCdnPrefix="http://image.zomo-studio.com/";
     public static final String qiNiuCompressCdnPrefix="http://image.compress.zomo-studio.com/";
-    public static final String qiNiuSmallImageSuffix="?imageView2/1/w/300/h/200/";
+    public static final String qiNiuSmallImageSuffix="?imageView2/1/w/450/h/450/";
     @Getter
     public enum ProjectStatus{
         ONLINE(0,"online"),
