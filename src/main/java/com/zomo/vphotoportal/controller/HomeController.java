@@ -22,8 +22,8 @@ public class HomeController {
         return "index";
     }
     @RequestMapping(value = "test")
-    public String test(Model model){
-        return "projectIndex";
+    public String test(){
+        return "weiChat";
     }
 
 
