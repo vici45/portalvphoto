@@ -26,5 +26,10 @@ public class HomeController {
         return "weiChat";
     }
 
+    @RequestMapping(value = "layui")
+    public String load(){
+        return "layui";
+    }
+
 
 }

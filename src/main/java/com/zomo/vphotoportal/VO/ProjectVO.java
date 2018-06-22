@@ -24,5 +24,7 @@ public class ProjectVO {
 
     private Date projectTime;
 
+    private String projectCodeHost;
+
     private List<ProjectDetailVO> projectDetailVOList=Lists.newArrayList();
 }

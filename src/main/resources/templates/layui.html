@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body>
+    <button class="test1">11111123</button>
+<script src="/layui/layui.all.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+    $('.test1').on('click', function(){
+        layer.open({
+            title: '二维码',
+            content: '\<\div>\<\img src="http://image.compress.zomo-studio.com/FsV7OVI_25narSYCW87r8bikRZ14">\<\/img>\<\/div>' +
+            '\<\div>\<\p>\<\/p>\<\/div>'
+
+        });
+    });
+</script>
+</body>
+</html>
