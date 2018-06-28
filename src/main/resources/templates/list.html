@@ -154,10 +154,9 @@
 
 </script>
 
-<script>
+<script th:inline="javascript">
     $(function(){
         var url = location.href.split('#')[0];//url不能写死
-        alert(url)
         $.ajax({
             type : "get",
             url : "/weiChatParam",
@@ -166,7 +165,7 @@
             data:{url:url},
             success : function(data) {
                 wx.config({
-                    debug: true,////生产环境需要关闭debug模式
+                    debug: false,////生产环境需要关闭debug模式
                     appId: data.appid,//appId通过微信服务号后台查看
                     timestamp: data.timestamp,//生成签名的时间戳
                     nonceStr: data.noncestr,//生成签名的随机字符串
@@ -186,13 +185,11 @@
     });
     wx.ready(function () {
         var link = window.location.href;
-        var protocol = window.location.protocol;
-        var host = window.location.host;
         //分享朋友圈
         wx.onMenuShareTimeline({
-            title: '这是一个自定义的标题！',
+            title: [[${project.projectName}]],
             link: link,
-            imgUrl: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=e0501fb39f2f07085f052d06d11fdfa4/5fdf8db1cb1349546ea5e598574e9258d0094a96.jpg',// 自定义图标
+            imgUrl: [[${project.projectBannerHost}]],// 自定义图标
             trigger: function (res) {
                 // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回.
                 //alert('click shared');
@@ -210,10 +207,10 @@
         });
         //分享给好友
         wx.onMenuShareAppMessage({
-            title: '这是一个自定义的标题！', // 分享标题
-            desc: '这是一个自定义的描述！', // 分享描述
+            title: [[${project.projectName}]], // 分享标题
+            desc: '活动照片由Zomo筋斗云摄影提供', // 分享描述
             link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: protocol+'//'+host+'/img/img1.jpg', // 自定义图标
+            imgUrl: [[${project.projectBannerHost}]], // 自定义图标
             type: 'link', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {
