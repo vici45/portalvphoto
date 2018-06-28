@@ -21,12 +21,12 @@ public class HomeController {
         model.addAttribute("projectVOList",response.getData());
         return "index";
     }
-    @RequestMapping(value = "test")
+    @RequestMapping(value = "testtest")
     public String test(){
         return "weiChat";
     }
 
-    @RequestMapping(value = "layui")
+    @RequestMapping(value = "list")
     public String load(){
         return "layui";
     }

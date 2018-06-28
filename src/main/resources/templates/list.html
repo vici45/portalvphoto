@@ -5,22 +5,21 @@
     <title th:text="${project.projectName}"></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="/css/page.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="/test/css/normalize.css" />
     <link rel="stylesheet" href="/css/baguetteBox.css"/>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 </head>
 <body>
 
-<div class="div-header">
+<div class="div-header" style="height: auto">
     <div class="div-left">
         <div class="div-img">
-            <img th:src="${project.projectBannerHost}" class="banner" >
+            <img th:src="${project.projectBannerHost}" class="banner">
         </div>
         <div class="div-text">
             <div class="block">
-                <p class="number" >333</p>
+                <p class="number">333</p>
                 <p class="text">浏览</p>
             </div>
             <div class="block">
@@ -32,11 +31,11 @@
     <div class="div-right">
         <div class="div-text">
             <p class="name" th:text="${project.projectName}"></p>
-            <p class="sit"  th:text="${project.projectSit}"></p>
+            <p class="sit" th:text="${project.projectSit}"></p>
             <p class="time" th:text="${project.projectTime}"></p>
         </div>
-        <div class="link">
-           <a th:href="${project.projectCodeHost}"> <img src="/img/share.png" class="img " id="qrcode" th:value="${project.projectCodeHost}"></a>
+        <div class="link" onclick="qrcode()">
+            <img src="/img/share.png" class="img">
         </div>
     </div>
 
@@ -55,12 +54,23 @@
 <div class="div-body">
 
     <div class="baguetteBoxOne ">
-          <div class="div-picture" th:each="detail,detailStatus:${project.projectDetailVOList}">
-            <a  th:href="${detail.middleImage}" data-caption="当前为压缩图,长按可保存" th:attr="data-origin=${detail.imageHost},data-origin-size=${detail.size}">
+        <div class="div-picture" th:each="detail,detailStatus:${project.projectDetailVOList}">
+            <a th:href="${detail.middleImage}" data-caption="当前为压缩图,长按可保存"
+               th:attr="data-origin=${detail.imageHost},data-origin-size=${detail.size}">
                 <img th:src="${detail.smallImage}" class="div-picture">
             </a>
-     </div>
+        </div>
 
+    </div>
+    <div class="div-vcode-overlay" id="vCode">
+        <div class="container-fluid div-qrcode" >
+            <div class="div-close-vcode">
+                <span class="glyphicon glyphicon-remove button-close-vcode" onclick="closeVCode()"
+                        ></span>
+            </div>
+            <img th:src="${project.projectCodeHost}" class="img-responsive center-block">
+            <p class="p-share">分享给朋友,或长按保存到本地相册</p>
+        </div>
     </div>
 
 
@@ -69,51 +79,157 @@
     <div class="footer-div">
         <img src="/img/topage.png" class="img" onclick="toPage()">
     </div>
-    <div class="footer-div">
+    <div class="footer-div toTop">
         <img src="/img/top.png" class="img" onclick="toTop()">
     </div>
     <div class="footer-div" onclick="refresh()">
-        <img src="/img/refresh.png" class="img" >
+        <img src="/img/refresh.png" class="img">
     </div>
-    <div class="footer-div">
+    <div class="footer-div" >
+        <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUxOTg3MDMzOA==&scene=124&#wechat_redirect">
         <img src="/img/contact.png" class="img">
+        </a>
     </div>
 </footer>
-<script	type="text/javascript" src="/js/baguetteBox.js"></script>
+<script type="text/javascript" src="/js/baguetteBox.js"></script>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    baguetteBox.run('.baguetteBoxOne');
 
-<script>
-        baguetteBox.run('.baguetteBoxOne');
+    var a = window.innerWidth / 16 + "px";
+    document.documentElement.style.fontSize = a;
 
-    var a=window.innerWidth/16+"px";
-    document.documentElement.style.fontSize=a;
-
-    function refresh(){
+    function refresh() {
         window.location.reload();
     }
+
     function toPage() {
-        window.location="http://www.baidu.com";
+        window.location = "http://www.baidu.com";
     }
+
     function toTop() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+        $('html,body').animate({scrollTop: '0px'}, 800);
     }
-    
+
+    function qrcode() {
+        document.getElementById('vCode').style.display = "block"
+
+    }
+
+    function closeVCode() {
+        document.getElementById('vCode').style.display = "none"
+
+    }
+    function toWeChat() {
+        window.location="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUxOTg3MDMzOA==&scene=124&#wechat_redirect"
+        
+    }
+
 
 </script>
-<!--<script src="/layui/layui.all.js"></script>-->
-<!--<script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>-->
-<!--<script>-->
 
-    <!--$('#qrcode').on('click', function(){-->
-        <!--layer.open({-->
-            <!--title: '二维码',-->
-            <!--area: ['300px', '300px'],-->
-            <!--content: $('#qrcode')-->
+<script type="text/javascript">
 
-        <!--});-->
-    <!--});-->
-<!--</script>-->
+    $(function () {
+
+        var speed = 800;//滚动速度
+
+
+        //回到顶部
+
+        $("#toTop").click(function () {
+
+            $('html,body').animate({
+
+                    scrollTop: '0px'
+
+                },
+
+                speed);
+
+        });
+
+
+    });
+
+</script>
+
+<script>
+    $(function(){
+        var url = location.href.split('#')[0];//url不能写死
+        alert(url)
+        $.ajax({
+            type : "get",
+            url : "/weiChatParam",
+            dataType : "json",
+            async : false,
+            data:{url:url},
+            success : function(data) {
+                wx.config({
+                    debug: true,////生产环境需要关闭debug模式
+                    appId: data.appid,//appId通过微信服务号后台查看
+                    timestamp: data.timestamp,//生成签名的时间戳
+                    nonceStr: data.noncestr,//生成签名的随机字符串
+                    signature: data.signature,//签名
+                    jsApiList: [//需要调用的JS接口列表
+                        'checkJsApi',//判断当前客户端版本是否支持指定JS接口
+                        'onMenuShareTimeline',//分享给好友
+                        'onMenuShareAppMessage'//分享到朋友圈
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                //alert(status);
+                //alert(xhr.responseText);
+            }
+        })
+    });
+    wx.ready(function () {
+        var link = window.location.href;
+        var protocol = window.location.protocol;
+        var host = window.location.host;
+        //分享朋友圈
+        wx.onMenuShareTimeline({
+            title: '这是一个自定义的标题！',
+            link: link,
+            imgUrl: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=e0501fb39f2f07085f052d06d11fdfa4/5fdf8db1cb1349546ea5e598574e9258d0094a96.jpg',// 自定义图标
+            trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回.
+                //alert('click shared');
+            },
+            success: function (res) {
+                //alert('shared success');
+                //some thing you should do
+            },
+            cancel: function (res) {
+                //alert('shared cancle');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+        //分享给好友
+        wx.onMenuShareAppMessage({
+            title: '这是一个自定义的标题！', // 分享标题
+            desc: '这是一个自定义的描述！', // 分享描述
+            link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: protocol+'//'+host+'/img/img1.jpg', // 自定义图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.error(function (res) {
+            alert(res.errMsg);
+        });
+    });
+</script>
+
+
 </body>
 
 </html>
