@@ -179,3 +179,8 @@ body{
 .div-close-vcode {
     text-align: right;
 }
+.img-close{
+    width: 20px;
+    margin-top: 5px;
+    margin-right: 5px;
+}

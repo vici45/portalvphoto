@@ -64,9 +64,8 @@
     </div>
     <div class="div-vcode-overlay" id="vCode">
         <div class="container-fluid div-qrcode" >
-            <div class="div-close-vcode">
-                <span class="glyphicon glyphicon-remove button-close-vcode" onclick="closeVCode()"
-                        ></span>
+            <div class="div-close-vcode" onclick="closeVCode()">
+                <img src="/img/close.png" class="img-close">
             </div>
             <img th:src="${project.projectCodeHost}" class="img-responsive center-block">
             <p class="p-share">分享给朋友,或长按保存到本地相册</p>
