@@ -42,7 +42,8 @@
     #baguetteBox-overlay .full-image figcaption {
       display: block;
       position: absolute;
-      bottom: 22%;
+      bottom: 20%;
+
       width: 100%;
       text-align: center;
       line-height: 1.8;

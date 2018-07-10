@@ -20,7 +20,7 @@
         </div>
         <div class="div-text">
             <div class="block">
-                <p class="number">333</p>
+                <p class="number" th:text="${project.projectPV}"></p>
                 <p class="text">浏览</p>
             </div>
             <div class="block">
@@ -90,7 +90,7 @@
 </footer>
 </div>
 <script type="text/javascript" src="/js/baguetteBox.js"></script>
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
 <script type="text/javascript">
     baguetteBox.run('.baguetteBoxOne');
     var a = window.innerWidth / 16 + "px";

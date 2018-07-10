@@ -6,7 +6,9 @@ import com.zomo.vphotoportal.VO.ProjectVO;
 import com.zomo.vphotoportal.common.Const;
 import com.zomo.vphotoportal.common.ServiceResponse;
 import com.zomo.vphotoportal.entity.Project;
+import com.zomo.vphotoportal.entity.ProjectData;
 import com.zomo.vphotoportal.entity.ProjectDetail;
+import com.zomo.vphotoportal.repository.ProjectDataRepository;
 import com.zomo.vphotoportal.repository.ProjectDetailRepository;
 import com.zomo.vphotoportal.repository.ProjectRepository;
 import com.zomo.vphotoportal.service.IProjectService;
@@ -26,6 +28,8 @@ public class ProjectServiceImp implements IProjectService {
     private ProjectRepository projectRepository;
     @Autowired
     private ProjectDetailRepository projectDetailRepository;
+    @Autowired
+    private ProjectDataRepository projectDataRepository;
 
     @Override
     public ServiceResponse findAll() {
@@ -60,6 +64,26 @@ public class ProjectServiceImp implements IProjectService {
            projectDetailVOList=assembleProjectDetailList2ProjectDetailVOList(projectDetailList);
         }
         projectVO.setProjectDetailVOList(projectDetailVOList);
+
+        return updateProjectPV(projectVO);
+    }
+    private ServiceResponse updateProjectPV(ProjectVO projectVO){
+        ProjectData projectData=projectDataRepository.findByProjectId(projectVO.getId());
+        if (projectData==null){
+            projectData.setProjectId(projectVO.getId());
+            projectData.setProjectPV(1);
+            projectData=projectDataRepository.save(projectData);
+            if (projectData==null){
+                return ServiceResponse.createErrorMsg("projectData init failed");
+            }
+        }
+        projectData.setProjectPV(projectData.getProjectPV()+1);
+        projectData=projectDataRepository.save(projectData);
+        if (projectData==null){
+            return ServiceResponse.createErrorMsg("projectData update failed");
+        }
+        projectVO.setProjectPV(projectData.getProjectPV());
+
         return ServiceResponse.createSuccess(projectVO);
     }
 

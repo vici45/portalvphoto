@@ -27,4 +27,6 @@ public class ProjectVO {
     private String projectCodeHost;
 
     private List<ProjectDetailVO> projectDetailVOList=Lists.newArrayList();
+
+    private Integer projectPV;
 }
