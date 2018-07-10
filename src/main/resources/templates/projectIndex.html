@@ -4,21 +4,28 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="/css/photo.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <title th:text="${project.projectName}"></title>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
 </head>
 
-
-<span id="span-timer"></span>
-
-<div id="my-image"th:style="'background:url(' + ${project.projectKeyImageHost} + ');' ">
+<body>
+<!--<span id="span-timer"></span>-->
+<!--<div id="my-image"th:style="'background:url(' + ${project.projectKeyImageHost} + ') no-repeat;' ">-->
+<!--</div>-->
+<!--<div>-->
+    <!--<a th:href="@{'/findByIdDetail/'+${project.id}}" id="detail-a"> <button id="entry-button"  >进&nbsp入&nbsp相&nbsp册</button> </a>-->
+<!--</div>-->
+<div class="div-keyImage" >
+    <span id="span-timer"></span>
+    <img th:src="${project.projectKeyImageHost}" alt="" class="img-keyImage">
 </div>
-<div>
-    <a th:href="@{'/findByIdDetail/'+${project.id}}" id="detail-a"> <button id="entry-button"  >进&nbsp入&nbsp相&nbsp册</button> </a>
-</div>
+<a th:href="@{'/findByIdDetail/'+${project.id}}" id="detail-a"> <button id="entry-button"  >进&nbsp入&nbsp相&nbsp册</button> </a>
+
 </body>
 <script	type="text/javascript">
 window.onload=function load() {
@@ -39,5 +46,78 @@ function go(){
     }
 }
 
+</script>
+<script th:inline="javascript">
+    $(function(){
+        var url = location.href.split('#')[0];//url不能写死
+        $.ajax({
+            type : "get",
+            url : "/weiChatParam",
+            dataType : "json",
+            async : false,
+            data:{url:url},
+            success : function(data) {
+                wx.config({
+                    debug: false,////生产环境需要关闭debug模式
+                    appId: data.appid,//appId通过微信服务号后台查看
+                    timestamp: data.timestamp,//生成签名的时间戳
+                    nonceStr: data.noncestr,//生成签名的随机字符串
+                    signature: data.signature,//签名
+                    jsApiList: [//需要调用的JS接口列表
+                        'checkJsApi',//判断当前客户端版本是否支持指定JS接口
+                        'onMenuShareTimeline',//分享给好友
+                        'onMenuShareAppMessage'//分享到朋友圈
+                    ]
+                });
+            },
+            error: function(xhr, status, error) {
+                //alert(status);
+                //alert(xhr.responseText);
+            }
+        })
+    });
+    wx.ready(function () {
+        var link = window.location.href;
+        var protocol = window.location.protocol;
+        var host = window.location.host;
+        //分享朋友圈
+        wx.onMenuShareTimeline({
+            title: [[${project.projectName}]],
+            link: link,
+            imgUrl: protocol+'//'+host+'/img/logo.png',// 自定义图标
+            trigger: function (res) {
+                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回.
+                //alert('click shared');
+            },
+            success: function (res) {
+                //alert('shared success');
+                //some thing you should do
+            },
+            cancel: function (res) {
+                //alert('shared cancle');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+        //分享给好友
+        wx.onMenuShareAppMessage({
+            title: [[${project.projectName}]], // 分享标题
+            desc: '活动照片由Zomo筋斗云摄影提供', // 分享描述
+            link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: protocol+'//'+host+'/img/logo.png', // 自定义图标
+            type: 'link', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.error(function (res) {
+            alert(res.errMsg);
+        });
+    });
 </script>
 </html>

@@ -12,6 +12,7 @@
 </head>
 <body>
 
+<div class="app">
 <div class="div-header" style="height: auto">
     <div class="div-left">
         <div class="div-img">
@@ -60,8 +61,8 @@
                 <img th:src="${detail.smallImage}" class="div-picture">
             </a>
         </div>
-
     </div>
+</div>
     <div class="div-vcode-overlay" id="vCode">
         <div class="container-fluid div-qrcode" >
             <div class="div-close-vcode" onclick="closeVCode()">
@@ -71,10 +72,7 @@
             <p class="p-share">分享给朋友,或长按保存到本地相册</p>
         </div>
     </div>
-
-
-</div>
-<footer class="footer">
+    <footer class="footer">
     <div class="footer-div">
         <img src="/img/topage.png" class="img" onclick="toPage()">
     </div>
@@ -90,20 +88,21 @@
         </a>
     </div>
 </footer>
+</div>
 <script type="text/javascript" src="/js/baguetteBox.js"></script>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
     baguetteBox.run('.baguetteBoxOne');
-
     var a = window.innerWidth / 16 + "px";
     document.documentElement.style.fontSize = a;
+
 
     function refresh() {
         window.location.reload();
     }
 
     function toPage() {
-        window.location = "http://www.baidu.com";
+        window.location = "";
     }
 
     function toTop() {
