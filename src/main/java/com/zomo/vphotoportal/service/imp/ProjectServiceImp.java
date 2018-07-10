@@ -70,17 +70,19 @@ public class ProjectServiceImp implements IProjectService {
     private ServiceResponse updateProjectPV(ProjectVO projectVO){
         ProjectData projectData=projectDataRepository.findByProjectId(projectVO.getId());
         if (projectData==null){
+            projectData=new ProjectData();
             projectData.setProjectId(projectVO.getId());
             projectData.setProjectPV(1);
             projectData=projectDataRepository.save(projectData);
             if (projectData==null){
                 return ServiceResponse.createErrorMsg("projectData init failed");
             }
-        }
-        projectData.setProjectPV(projectData.getProjectPV()+1);
-        projectData=projectDataRepository.save(projectData);
-        if (projectData==null){
-            return ServiceResponse.createErrorMsg("projectData update failed");
+        }else {
+            projectData.setProjectPV(projectData.getProjectPV() + 1);
+            projectData = projectDataRepository.save(projectData);
+            if (projectData == null) {
+                return ServiceResponse.createErrorMsg("projectData update failed");
+            }
         }
         projectVO.setProjectPV(projectData.getProjectPV());
 
