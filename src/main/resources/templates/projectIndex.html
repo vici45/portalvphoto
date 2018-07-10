@@ -15,43 +15,13 @@
 </head>
 
 <body>
-<!--<span id="span-timer"></span>-->
-<!--<div id="my-image"th:style="'background:url(' + ${project.projectKeyImageHost} + ') no-repeat;' ">-->
-<!--</div>-->
-<!--<div>-->
-    <!--<a th:href="@{'/findByIdDetail/'+${project.id}}" id="detail-a"> <button id="entry-button"  >进&nbsp入&nbsp相&nbsp册</button> </a>-->
-<!--</div>-->
 <div class="div-keyImage" >
     <span id="span-timer"></span>
     <img th:src="${project.projectKeyImageHost}" alt="" class="img-keyImage">
 </div>
 <a th:href="@{'/findByIdDetail/'+${project.id}}" id="detail-a"> <button id="entry-button"  >进&nbsp入&nbsp相&nbsp册</button> </a>
 
-</body>
-<script	type="text/javascript">
-    var w=window.innerWidth+'px';
-    var h=window.innerHeight+'px';
-    document.getElementsByClassName('img-keyImage')[0].style.height=h;
-    document.getElementsByClassName('img-keyImage')[0].style.width=w;
-window.onload=function load() {
-setInterval(go,1000);
 
-
-
-};
-
-var x=5;
-function go(){
-    x--;
-    if (x>0){
-        document.getElementById("span-timer").innerHTML=x+'s';
-    }else {
-        location.href=document.getElementById("detail-a").getAttribute("href");
-
-    }
-}
-
-</script>
 <script th:inline="javascript">
     $(function(){
         var url = location.href.split('#')[0];//url不能写死
@@ -125,4 +95,29 @@ function go(){
         });
     });
 </script>
+<script	type="text/javascript">
+    var w=window.innerWidth+'px';
+    var h=window.innerHeight+'px';
+    document.getElementsByClassName('img-keyImage')[0].style.height=h;
+    document.getElementsByClassName('img-keyImage')[0].style.width=w;
+    window.onload=function load() {
+        setInterval(go,1000);
+
+
+
+    };
+
+    var x=5;
+    function go(){
+        x--;
+        if (x>0){
+            document.getElementById("span-timer").innerHTML=x+'s';
+        }else {
+            location.href=document.getElementById("detail-a").getAttribute("href");
+
+        }
+    }
+
+</script>
+</body>
 </html>
